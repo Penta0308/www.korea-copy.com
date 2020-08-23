@@ -654,10 +654,14 @@ function _sendmail2($to, $from, $file)
 
 	return true;
 }
-'''
-
+```
 Fucking useless developer that has no mother hardcoding Sensitive information  LOL.
 
-and they don't have any conception about copyright. 
+### LICENSE
 
-so i share this repository with mit license
+They don't have any conception about copyright. 
+
+Depending on their motherfucking communism. (they shared fucking North Korea's supreme leader kim jung woon's mother Go Young hee and
+north korea's citizen share kim's mother and gangbanging her)
+
+So i share this repository with mit license
