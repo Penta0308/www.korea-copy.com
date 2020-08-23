@@ -5,7 +5,7 @@ You can find many information in this source code
 
 
 #### Source
-
+```PHP
 <?php
 require_once("Net/POP3.php");             // PEAR Net_POP3
 require_once("Mail/mimeDecode.php");      // PEAR MimeDecode
