@@ -1,0 +1,17 @@
+<!--##TMP_HTML##-->header<!--##TMP_HTML##-->
+
+
+<table class="msg_form"><tr><td>
+<!--##IF_NOT_MSG_ERR##-->##MSG##<!--##/IF_NOT_MSG_ERR##-->
+<!--##IF_MSG_ERR##--><span style="color:#FF0000">##MSG##</span><!--##/IF_MSG_ERR##-->
+</td></tr></table>
+
+<!--##IF_MSG_HIDDEN_PARA##-->
+<form method="post" action="##MYACT##" name="fmsg">
+<!--##MSG_HIDDEN_PARA##-->
+<table class="msg_btn"><tr><td><input type="submit" value='##MSG_BTN##' class="w100 btn" /></td></tr></table>
+</form>
+<!--##/IF_MSG_HIDDEN_PARA##-->
+
+
+<!--##TMP_HTML##-->footer<!--##TMP_HTML##-->

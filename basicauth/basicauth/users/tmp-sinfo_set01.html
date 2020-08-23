@@ -1,0 +1,162 @@
+<!--##TMP_HTML##-->header<!--##TMP_HTML##-->
+
+<script type="text/javascript">
+<!--
+// on load
+function on_load()
+{
+}
+
+// on submit
+function on_submit(myform)
+{
+	if (myform.p_act.value == 'sinfo_upd02')
+	{
+		if (!confirm('情報を##KSTR1##します。宜しいですか？')) { return false; }
+	}
+	myform.p_tmp.value = 'msg';
+
+	return true;
+}
+//-->
+</script>
+
+
+<div class="input_guide">
+・以下の各項目を指定して［##KSTR1##］を押してください。<br />
+・最初の管理ユーザー登録時・パスワード変更時には直ちに認証画面が表示されます。<br />
+　指定したユーザー名とパスワードを指定して下さい。<br />
+・<span class="hissu">（必須）</span>の項目は必ず指定してください。
+</div>
+
+<form method="post" action="##MYACT##" name="fprev">
+<input type="hidden" name="p_act"  value="sinfo_list" />
+</form>
+
+<form method="post" action="##MYACT##" enctype="multipart/form-data" name="fnext" onsubmit="return on_submit(this);"  autocomplete="off">
+<input type="hidden" name="p_act"  value="sinfo_##STR1##02" />
+<input type="hidden" name="p_tmp"  value="" />
+<input type="hidden" name="p_key"  value="##P_KEY##" />
+<input type="hidden" name="p_case" value="##P_CASE##" />
+<input type="hidden" name="MAX_FILE_SIZE" value="##MAX_FILE_SIZE##" />
+<!--##HIDDEN_PARA##-->
+
+<table class="input_btn"><tr>
+	<td><input type="submit" value='##KSTR2##' class="w100 btn" /></td>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+<div class="input_div">
+<table class="tbl">
+	<tr><td colspan="2" class="h1">BASIC認証ユーザーの##KSTR1##</td></tr>
+
+	<!--##IF_INS##-->
+	<tr>
+		<td class="h2">ユーザー名<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<input type="text" name='i_user' value='##I_USER##' maxlength="255" class="w200 koff" />
+			&nbsp;（任意の半角英数字）
+		</td>
+	</tr>
+
+	<tr>
+		<td class="h2">パスワード<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<input type="password" name='i_pwd' value='##I_PWD##' maxlength="255" class="w200 koff" />
+			&nbsp;（任意の半角英数字）
+			&nbsp;［<a href="javascript:alert(document.fnext.i_pwd.value);">確認</a>］
+		</td>
+	</tr>
+	<!--##/IF_INS##-->
+
+	<!--##IF_NOT_INS##-->
+	<tr>
+		<td class="h2">ユーザー名</td>
+		<td class="d1">
+			##USER##
+		</td>
+	</tr>
+
+	<tr>
+		<td class="h2">パスワード</td>
+		<td class="d1">
+			<input type="password" name='i_pwd' value='##I_PWD##' maxlength="255" class="w200 koff" />
+			&nbsp;（任意の半角英数字）
+			&nbsp;［<a href="javascript:alert(document.fnext.i_pwd.value);">確認</a>］<br />
+			※パスワードを変更する場合にのみ指定して下さい。
+		</td>
+	</tr>
+	<!--##/IF_NOT_INS##-->
+
+	<tr>
+		<td class="h2">コメント</td>
+		<td class="d1">
+			<input type="text" name='i_cmt' value='##I_CMT##' maxlength="400" class="w500 kon" /><br />
+			※このユーザーに補足説明がある場合は記入して下さい。
+		</td>
+	</tr>
+
+	<!--##IF_NOT_BASIC_USER##-->
+	<tr>
+		<td class="h2">ユーザー区分<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<div style="margin:10px 0px 0px 0px;">
+			<!--##SLIST_USER_TYPE##-->
+			<input type="radio" name="i_user_type" value="##SLIST_USER_TYPE_VAL##" id="user_type_##SLIST_USER_TYPE_CNT##"
+			 ##SLIST_USER_TYPE_CHK## /><label for="user_type_##SLIST_USER_TYPE_CNT##"> ##SLIST_USER_TYPE_STR##</label>&nbsp;　&nbsp;
+			<!--##SLIST_USER_TYPE##-->
+			</div>
+			<table class="cmt">
+				<tr>
+					<td style="width:60px;">［通常］</td>
+					<td>BASIC認証でログインは可能ですが、このBASIC認証管理機能にはアクセスできないユーザーです。</td>
+				</tr>
+				<tr>
+					<td>［管理者］</td>
+					<td>このBASIC認証管理機能にアクセスできるユーザーです。
+						<span style="color:red">少なくとも１人は登録して下さい。</span></td>
+				</tr>
+				<tr>
+					<td>［停止］</td>
+					<td>BASIC認証でのログインが停止中のユーザーです。</td>
+				<tr>
+			</table>
+		</td>
+	</tr>
+	<!--##/IF_NOT_BASIC_USER##-->
+
+	<!--##IF_BASIC_USER##-->
+	<tr>
+		<td class="h2">ユーザー区分</td>
+		<td class="d1">
+			<input type="hidden" name='i_user_type' value='##I_USER_TYPE##' />
+			<div style="margin:10px 0px 0px 0px;">
+			［管理者］
+			</div>
+			※現在ログイン中のユーザーはユーザー区分を変更出来ません。
+		</td>
+	</tr>
+	<!--##/IF_BASIC_USER##-->
+
+	<!--##IF_NOT_INS##-->
+	<tr>
+		<td class="h2">登録日時</td>
+		<td class="d1">##INS_TIME##</td>
+	</tr>
+	<tr>
+		<td class="h2">更新日時</td>
+		<td class="d1">##UPD_TIME##</td>
+	</tr>
+	<!--##/IF_NOT_INS##-->
+</table>
+</div>
+
+<table class="input_btn"><tr>
+	<td><input type="submit" value='##KSTR2##' class="w100 btn" /></td>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+</form>
+
+
+<!--##TMP_HTML##-->footer<!--##TMP_HTML##-->

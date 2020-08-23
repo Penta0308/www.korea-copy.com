@@ -1,0 +1,59 @@
+<!--##TMP_HTML##-->header<!--##TMP_HTML##-->
+
+
+<div class="input_guide">
+・以下の各項目を指定して［設定実行］をクリックしてください。<br />
+・<span class="hissu">（必須）</span>の項目は必ず指定してください。
+</div>
+
+<form method="post" action="##MYACT##" name="fprev">
+<input type="hidden" name="p_act"  value="sinfo_list" />
+</form>
+
+<form method="post" action="##MYACT##" name="fnext">
+<input type="hidden" name="p_act"  value="etc_set02" />
+<input type="hidden" name="p_tmp"  value="msg" />
+
+<table class="input_btn"><tr>
+	<td><input type="submit" value=' 設定実行 ' class="w100 btn" /></td>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+<div class="input_div">
+<table class="tbl">
+	<tr><td colspan="2" class="h1">システム設定</td></tr>
+
+	<tr>
+		<td class="h2">エリア名<br />（メッセージ）<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<input type="text" name='i_auth_name' value='##I_AUTH_NAME##' class="w600" /><br />
+			※BASIC認証ダイアログ内に表示する認証エリア名（メッセージ）を指定して下さい。<br />
+			※日本語を指定した場合、ブラウザによっては正常に表示できません。できるだけ英字で指定して下さい。<br />
+		</td>
+	</tr>
+
+	<tr>
+		<td class="h2">文字コード<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<select name="i_auth_name_enc">##OPT_AUTH_NAME_ENC##</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="h2">アクセス記録<br />保存件数<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<input type="text" name='i_log_save' value='##I_LOG_SAVE##' class="w50" /> 件／ユーザー
+		</td>
+	</tr>
+</table>
+</div>
+
+<table class="input_btn"><tr>
+	<td><input type="submit" value=' 設定実行 ' class="w100 btn" /></td>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+</form>
+
+
+<!--##TMP_HTML##-->footer<!--##TMP_HTML##-->

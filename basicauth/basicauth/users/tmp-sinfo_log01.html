@@ -1,0 +1,88 @@
+<!--##TMP_HTML##-->header<!--##TMP_HTML##-->
+
+<script type="text/javascript">
+<!--
+// on load
+function on_load()
+{
+}
+
+// on submit
+function on_submit(myform)
+{
+	if (myform.p_act.value == 'sinfo_log02')
+	{
+		if (!confirm('このユーザーのアクセス記録を消去します。宜しいですか？')) { return false; }
+	}
+	myform.p_tmp.value = 'msg';
+
+	return true;
+}
+//-->
+</script>
+
+
+<div class="input_guide">
+</div>
+
+<form method="post" action="##MYACT##" name="fprev">
+<input type="hidden" name="p_act"  value="sinfo_list" />
+</form>
+
+<form method="post" action="##MYACT##" enctype="multipart/form-data" name="fnext" onsubmit="return on_submit(this);">
+<input type="hidden" name="p_act"  value="sinfo_log02" />
+<input type="hidden" name="p_tmp"  value="msg" />
+<input type="hidden" name="p_user"  value="##USER##" />
+
+<table class="input_btn"><tr>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+<div class="input_div">
+<table class="tbl">
+	<tr><td colspan="2" class="h1">アクセス記録</td></tr>
+
+	<tr>
+		<td class="h2">ユーザー名</td>
+		<td class="d1">##USER##</td>
+	</tr>
+
+	<tr>
+		<td class="h2">アクセス記録</td>
+		<td class="d1">
+			アクセス日時,　アクセスページ,　IPアドレス,　USER_AGENT<br />
+			<textarea cols="60" rows="16" class="w500 koff"  readonly="readonly" onfocus="this.select()">##ACCLOGS##</textarea><br />
+			<input type="submit" value='記録の消去' class="w100 btn" />
+		</td>
+	</tr>
+
+	<tr>
+		<td class="d1" colspan="2">
+			※アクセス記録を取るには、記録を取りたいページ（HTML）の &lt;/body&gt; タグの前辺りに下のコードを埋め込んでください。（ sample-##MYEXT##.html 参照 ）<br />
+			※記録を取りたいページ（HTML）が basicauth-log.##MYEXT## より下位のフォルダーに位置する場合は、basicauth-log.##MYEXT## への相対パスでコードを埋め込んでください。<br />
+			　例）　&lt;img src="../basicauth-log.##MYEXT##?page=･･･<br />
+<textarea cols="60" rows="4" style="font-size:12px;line-height:14px;color:#902020;width:98%;"  readonly="readonly" onfocus="this.select()">&lt;!-- アクセス記録収集 --&gt;
+&lt;script type="text/javascript"&gt;
+&lt;!--
+var page = document.URL;
+var date = new Date();
+var time = date.getTime();
+document.write('&lt;div style="display:none;"&gt;&lt;img src="basicauth-log.##MYEXT##?page='+page+'&time='+time+'" width="0" height="0" alt="" /&gt;&lt;/div&gt;');
+//--&gt;
+&lt;/script&gt;
+&lt;!--/アクセス記録収集 --&gt;
+</textarea>
+		</td>
+	</tr>
+
+</table>
+</div>
+
+<table class="input_btn"><tr>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+</form>
+
+
+<!--##TMP_HTML##-->footer<!--##TMP_HTML##-->

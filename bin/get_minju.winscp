@@ -1,0 +1,9 @@
+option batch on
+option confirm off
+open kpeicftp@175.45.176.12
+option transfer binary
+lcd "C:\www.korea-copy.com\minju\ftpdata"
+cd /media
+get -delete Minju*
+exit
+

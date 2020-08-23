@@ -1,0 +1,361 @@
+<!--##TMP_HTML##-->header<!--##TMP_HTML##-->
+
+<script type="text/javascript">
+<!--
+// on page
+function on_disp(myobj)
+{
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_list';
+	myform.p_tmp.value  = '';
+	myform.p_page.value = 1;
+	myform.p_key.value  = '';
+	myform.p_case.value = '';
+	myform.submit();
+}
+
+// on insert
+function on_ins(myobj)
+{
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_ins01';
+	myform.p_tmp.value  = 'sinfo_set01';
+	myform.p_page.value = '##PAGE##';
+	myform.p_case.value = 'ins';
+	myform.submit();
+}
+
+// on update
+function on_upd(myobj, p_key)
+{
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_upd01';
+	myform.p_tmp.value  = 'sinfo_set01';
+	myform.p_key.value  = p_key;
+	myform.p_case.value = 'upd';
+}
+
+// on copy
+function on_cpy(myobj, p_key, p_pos)
+{
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_ins01';
+	myform.p_tmp.value  = 'sinfo_set01';
+	myform.p_key.value  = p_key;
+	myform.p_case.value = 'cpy';
+	myform.p_pos.value  = p_pos + 1;
+}
+
+// on delete
+function on_del(myobj)
+{
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_del';
+	myform.p_tmp.value   = 'msg';
+	myform.p_page.value  = '##PAGE##';
+}
+
+// on etc
+function on_etc(myobj)
+{
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value = 'etc_set01';
+	myform.p_tmp.value = '';
+	myform.submit();
+}
+
+// on download
+function on_down()
+{
+	document.fdown.submit();
+}
+
+// on upload
+function on_up(myobj)
+{
+	<!--##IF_USER_EXIST##-->
+	alert('［ユーザー情報の全消去］を行って、全ユーザーを削除してからから実行して下さい。');
+	return;
+	<!--##/IF_USER_EXIST##-->
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value = 'sinfo_up01';
+	myform.p_tmp.value = '';
+	myform.submit();
+}
+
+// on access log clear
+function on_logclear(myobj)
+{
+	if (!confirm('全ユーザーのアクセス記録を全て消去します。宜しいですか？')) { return; }
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_logclear';
+	myform.p_tmp.value   = 'msg';
+	myform.p_page.value  = '##PAGE##';
+	myform.submit();
+}
+
+// on clear
+function on_clear(myobj)
+{
+	if (!confirm('登録されているユーザー情報を全て消去し、BASIC認証を解除します。宜しいですか？')) { return; }
+	myform = myobj.form;
+	myform.action = '##MYACT##';
+	myform.target = '_self';
+	myform.p_act.value  = 'sinfo_clear';
+	myform.p_tmp.value   = 'msg';
+	myform.p_page.value  = '1';
+	myform.submit();
+}
+
+// on return
+function on_rtn(myobj)
+{
+	document.frtn.submit();
+}
+
+// on submit
+function on_submit(myform)
+{
+	if (myform.p_act.value == 'sinfo_del')
+	{
+		// check delete key
+		chk_cnt = 0;
+		for (i = 0; i < myform.elements.length; i ++)
+		{
+			if (myform.elements[i].name == 'p_keys[]')
+			{
+				if (myform.elements[i].checked) { chk_cnt ++; }
+			}
+		}
+		if (chk_cnt <= 0) { alert('削除する行の削除チェックボックスを一つ以上選択して下さい。'); return false; }
+
+		// confirm
+		if (!confirm('選択行の情報を全て削除します。よろしいですか？')) { return false; }
+	}
+
+	return true;
+}
+//-->
+</script>
+
+<div class="list_guide w800">
+・［新規登録］［修正］［削除］でユーザー情報の新規登録、修正、削除が行えます。<br />
+・（条件）を指定して［再表示］で、指定した条件に一致する情報のみが表示されます。<br />
+・［システム設定］ではBASIC認証のダイアログに表示されるエリア名（メッセージ）等を設定できます。<br />
+・最終アクセスのクリックでアクセス記録が閲覧でき、［アクセス記録の全消去］で全ての記録は削除されます。<br />
+・［ユーザー情報の全消去］で全ての BASIC認証のユーザーは削除され、BASIC認証が解除されます。<br />
+・［ユーザー情報のダウンロード］［ユーザー情報のアップロード］で、ユーザー情報を保存および復元できます。
+</div>
+
+<form method="post" action="##MYACT##" name="frtn">
+<input type="hidden" name="p_act" value="menu" />
+</form>
+<form method="post" action="##MYACT##" name="flst" onsubmit="return on_submit(this);">
+<input type="hidden" name="p_act"    value="" />
+<input type="hidden" name="p_tmp"    value="" />
+<input type="hidden" name="p_page"   value="" />
+<input type="hidden" name="p_key"    value="" />
+<input type="hidden" name="p_case"   value="" />
+<input type="hidden" name="p_pos"    value="" />
+<input type="hidden" name="p_knum"   value="" />
+<input type="hidden" name="p_init"   value="" />
+
+<div class="list_btn w800">
+	<div><input type="button" value="新規登録" onclick="on_ins(this)"  class="btn w90" /></div>
+	<div><input type="button" value="再表示"   onclick="on_disp(this)" class="btn w90" /></div>
+	<div>表示順：<select name="p_order" size="1" onchange="on_disp(this)">##OPT_ORDER##</select></div>
+	<div>&nbsp;　&nbsp;</div>
+	<div><input type="button" value="システム設定" onclick="on_etc(this)"  class="btn" style="width:120px;" /></div>
+</div>
+
+
+<div class="list_plst w800">
+<!-- ○○件中　○～○件を表示中 -->
+##PLST_KENSU## 件中　##PLST_CNT1## ～ ##PLST_CNT2## 件を表示中
+&nbsp;　&nbsp;
+<!-- ページ替えリンク [1] ... [4][5][6][7][8][9][10][11] ... [20] の表示 -->
+<!--##IF_PLST_TPAGE##-->
+<a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_TPAGE##">##PLST_TPAGE##</a> ...
+<!--##/IF_PLST_TPAGE##-->
+<!--##LIST_PLST##-->
+<!--##IF_LIST_PLST_PAGE##-->
+<b>##LIST_PLST_PAGE##</b>
+<!--##/IF_LIST_PLST_PAGE##-->
+<!--##IF_NOT_LIST_PLST_PAGE##-->
+<a href="##MYACT##?p_act=sinfo_list&p_page=##LIST_PLST_PAGE##">##LIST_PLST_PAGE##</a>
+<!--##/IF_NOT_LIST_PLST_PAGE##-->
+<!--##LIST_PLST##-->
+<!--##IF_PLST_BPAGE##-->
+... <a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_BPAGE##">##PLST_BPAGE##</a>
+<!--##/IF_PLST_BPAGE##-->
+&nbsp;
+
+<!--##IF_PLST_PAGE_PREV##-->
+&nbsp;<a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_PAGE_PREV##">&lt;&lt; 前ページ</a>
+<!--##/IF_PLST_PAGE_PREV##-->
+
+<!--##IF_PLST_PAGE_NEXT##-->
+&nbsp;<a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_PAGE_NEXT##">次ページ &gt;&gt;</a>
+<!--##/IF_PLST_PAGE_NEXT##-->
+</div>
+
+
+<div class="list_div w800">
+<table class="tbl">
+ <tr><td colspan="9" class="h1">BASIC認証ユーザー一覧</td></tr>
+
+ <tr>
+  <td class="h2" style="min-width:30px;">No.</td>
+  <td class="h2" style="min-width:70px;">ユーザー名<br />
+   <span class="lstjkn">（条件）</span><br />
+   <input type="text" name="p_jkn_user" value='##I_JKN_USER##' class="kon" /></td>
+  <td class="h2" style="min-width:70px;">コメント<br />
+   <span class="lstjkn">（条件）</span><br />
+   <input type="text" name="p_jkn_cmt" value='##I_JKN_CMT##' class="kon" /></td>
+  <td class="h2">ユーザー区分<br />
+   <span class="lstjkn">（条件）</span><br />
+   <select name="p_jkn_user_type"><option value="">##OPT_JKN_USER_TYPE##</select></td>
+  <td class="h2" style="min-width:60px;">登録日</td>
+  <td class="h2" style="min-width:60px;">更新日</td>
+  <td class="h2" style="min-width:60px;">最終<br />アクセス</td>
+  <td class="h2">修正</td>
+  <td class="h2">削除</td>
+ </tr>
+
+ <!--##LIST##-->
+ <tr>
+  <td class="d1" style="text-align:center;">##LIST_CNT##</td>
+  <td class="d1" style="text-align:left;  ">##LIST_USER##</td>
+  <td class="d1" style="text-align:left;  ">##LIST_CMT##</td>
+  <td class="d1" style="text-align:center;">##LIST_USER_TYPE_STR##</td>
+  <td class="d1" style="text-align:center;">##LIST_INS_TIME##</td>
+  <td class="d1" style="text-align:center;">##LIST_UPD_TIME##</td>
+  <td class="d1" style="text-align:center;"><a href="##MYACT##?p_act=sinfo_log01&p_user=##LIST_USER##">##LIST_ACC_TIME##</a></td>
+  <td class="d1" style="text-align:center;"><input
+		type="submit" value="修正" onclick="on_upd(this, '##LIST_KEY##')" class="btn w40" /></td>
+  <td class="d1" style="text-align:center;">
+		<!--##IF_LIST_BASIC_USER##-->
+		不可
+		<!--##/IF_LIST_BASIC_USER##-->
+		<!--##IF_NOT_LIST_BASIC_USER##-->
+		<input type="checkbox" name="p_keys[]" value="##LIST_KEY##" />
+		<!--##/IF_NOT_LIST_BASIC_USER##-->
+  </td>
+ </tr>
+ <!--##LIST##-->
+
+ <tr>
+  <td colspan="8" class="d1">&nbsp;</td>
+  <td class="d1" style="text-align:center;"><input type="submit" value="削除" onclick="on_del(this)" class="btn w40" /></td>
+ </tr>
+
+</table>
+</div>
+
+
+<div class="list_plst w800">
+<!-- ○○件中　○～○件を表示中 -->
+##PLST_KENSU## 件中　##PLST_CNT1## ～ ##PLST_CNT2## 件を表示中
+&nbsp;　&nbsp;
+<!-- ページ替えリンク [1] ... [4][5][6][7][8][9][10][11] ... [20] の表示 -->
+<!--##IF_PLST_TPAGE##-->
+<a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_TPAGE##">##PLST_TPAGE##</a> ...
+<!--##/IF_PLST_TPAGE##-->
+<!--##LIST_PLST##-->
+<!--##IF_LIST_PLST_PAGE##-->
+<b>##LIST_PLST_PAGE##</b>
+<!--##/IF_LIST_PLST_PAGE##-->
+<!--##IF_NOT_LIST_PLST_PAGE##-->
+<a href="##MYACT##?p_act=sinfo_list&p_page=##LIST_PLST_PAGE##">##LIST_PLST_PAGE##</a>
+<!--##/IF_NOT_LIST_PLST_PAGE##-->
+<!--##LIST_PLST##-->
+<!--##IF_PLST_BPAGE##-->
+... <a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_BPAGE##">##PLST_BPAGE##</a>
+<!--##/IF_PLST_BPAGE##-->
+&nbsp;
+
+<!--##IF_PLST_PAGE_PREV##-->
+&nbsp;<a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_PAGE_PREV##">&lt;&lt; 前ページ</a>
+<!--##/IF_PLST_PAGE_PREV##-->
+
+<!--##IF_PLST_PAGE_NEXT##-->
+&nbsp;<a href="##MYACT##?p_act=sinfo_list&p_page=##PLST_PAGE_NEXT##">次ページ &gt;&gt;</a>
+<!--##/IF_PLST_PAGE_NEXT##-->
+</div>
+
+
+<div class="list_btn w800">
+	<div><input type="button" value="アクセス記録の全消去" onclick="on_logclear(this)"  class="btn" style="width:180px;" /></div>
+	<div><input type="button" value="ユーザー情報の全消去" onclick="on_clear(this)"  class="btn" style="width:180px;" /></div>
+</div>
+<div class="list_btn w800">
+	<div><input type="button" value="ユーザー情報のダウンロード" onclick="on_down()" class="btn" style="width:180px;" /></div>
+	<div><input type="button" value="ユーザー情報のアップロード" onclick="on_up(this)" class="btn" style="width:180px;" /></div>
+</div>
+</form>
+
+<form method="post" action="##MYACT##" name="fdown">
+<input type="hidden" name="p_act"  value="sinfo_down" />
+<input type="hidden" name="p_tmp"  value="msg" />
+<input type="hidden" name="p_page" value="##PAGE##" />
+</form>
+
+<!--
+<table class="download_form" style="width:890px; margin-top:80px;">
+	<tr>
+		<th>設定情報のダウンロード</th>
+		<th>設定情報のアップロード</th>
+	</tr>
+	<tr>
+		<td class="d1">
+			現在のユーザー情報をダウンロードして保存できます。
+		</td>
+		<td class="d1">
+			ダウンロードしたユーザー情報をアップロードして設定します。<br />
+			（［BASIC認証情報の全消去］を行ってから実行して下さい）
+		</td>
+	</tr>
+	<tr>
+		<td class="d2">
+			<form method="post" action="##MYACT##" name="fdown">
+			<input type="hidden" name="p_act"  value="sinfo_down" />
+			<input type="hidden" name="p_tmp"  value="msg" />
+			<input type="hidden" name="p_page" value="##PAGE##" />
+			<input type="submit" value="設定情報のダウンロード" class="w200 btn" />
+			</form>
+		</td>
+		<td class="d2">
+			<form method="post" action="##MYACT##" name="fup" enctype="multipart/form-data">
+			<input type="hidden" name="p_act"  value="sinfo_up" />
+			<input type="hidden" name="p_tmp"  value="msg" />
+			<input type="hidden" name="p_page" value="##PAGE##" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="2048000" />
+			［ファイル］ <input type="file" name="i_up_file" /><br />
+			<input type="button" value="設定情報のアップロード" class="w200 btn"
+					onclick="if (confirm('設定情報をアップロードして登録します。宜しいですか？')) { this.form.submit(); }" />
+			</form>
+		</td>
+	</tr>
+</table>
+-->
+
+
+
+
+<!--##TMP_HTML##-->footer<!--##TMP_HTML##-->

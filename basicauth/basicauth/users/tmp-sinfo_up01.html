@@ -1,0 +1,47 @@
+<!--##TMP_HTML##-->header<!--##TMP_HTML##-->
+
+
+<div class="input_guide">
+・以下の各項目を指定して［実行］をクリックしてください。<br />
+・<span class="hissu">（必須）</span>の項目は必ず指定してください。
+</div>
+
+<form method="post" action="##MYACT##" name="fprev">
+<input type="hidden" name="p_act"  value="sinfo_list" />
+</form>
+
+<form method="post" action="##MYACT##" name="fnext" enctype="multipart/form-data">
+<input type="hidden" name="p_act"  value="sinfo_up02" />
+<input type="hidden" name="p_tmp"  value="msg" />
+<input type="hidden" name="MAX_FILE_SIZE" value="2048000" />
+
+<table class="input_btn"><tr>
+	<td><input type="submit" value=' 実　行 ' class="w100 btn" /></td>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+<div class="input_div">
+<table class="tbl">
+	<tr><td colspan="2" class="h1">ユーザー情報のアップロード</td></tr>
+
+	<tr>
+		<td class="h2">アップロードファイル<div class="hissu">（必須）</div></td>
+		<td class="d1">
+			<input type="file" name="i_up_file" /><br />
+			<br />
+			※ダウンロード時と同じファイルを指定して下さい。
+		</td>
+	</tr>
+
+</table>
+</div>
+
+<table class="input_btn"><tr>
+	<td><input type="submit" value=' 実　行 ' class="w100 btn" /></td>
+	<td><input type="button" value=' 戻　る ' onclick="document.fprev.submit()" class="w100 btn" /></td>
+</tr></table>
+
+</form>
+
+
+<!--##TMP_HTML##-->footer<!--##TMP_HTML##-->
