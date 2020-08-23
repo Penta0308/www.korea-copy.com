@@ -654,6 +654,8 @@ function _sendmail2($to, $from, $file)
 
 	return true;
 }
+'''
+
 Fucking useless developer that has no mother hardcoding Sensitive information  LOL.
 
 and they don't have any conception about copyright. 
